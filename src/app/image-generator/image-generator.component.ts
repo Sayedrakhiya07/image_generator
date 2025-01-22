@@ -21,7 +21,9 @@ export class ImageGeneratorComponent {
     }
 
     const payload = { prompt: this.prompt };
-    fetch('http://localhost:3020/generate-image', {
+    // fetch('http://122.163.121.176:3004/generate_image',
+    fetch('http://192.168.1.200:3020/generate_image',
+     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -31,7 +33,24 @@ export class ImageGeneratorComponent {
       }
       return response.json();
     }).then(data => {
-      this.generatedImageUrl = "D:\\Subhendu-Roy\\image_generation\\image_generation\\" + data.filename;
+      // fetch("http://122.163.121.176:3004/get_image",
+      fetch("http://192.168.1.200:3020/get_image",
+       {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ filename: data.filename })
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error("Failed to get image");
+        }
+        return response.blob();
+      }).then(blob => {
+        const url = URL.createObjectURL(blob);
+        this.generatedImageUrl = url;
+      }).catch(error => {
+        console.error(error);
+        alert("Failed to get image");
+      });
     }).catch(error => {
       console.error(error);
       alert('Failed to generate image');
