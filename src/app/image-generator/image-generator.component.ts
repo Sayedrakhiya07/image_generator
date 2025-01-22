@@ -21,7 +21,7 @@ export class ImageGeneratorComponent {
     }
 
     const payload = { prompt: this.prompt };
-    fetch('http://localhost:5000/generate-image', {
+    fetch('http://localhost:3020/generate-image', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
