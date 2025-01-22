@@ -1,0 +1,21 @@
+<div class="container">
+  <h2 class="text-center text-white fw-bold">Generative Image Tool</h2>
+  <div class="input-container">
+    <span class="p-float-label">
+      <label for="prompt" class="form-label text-white">Enter your prompt</label>
+      <input id="prompt" class="form-control" type="text" pInputText [(ngModel)]="prompt" />
+    </span>
+  </div>
+
+  <div class="button-container">
+    <button class="btn btn-primary" label="Generate" icon="pi pi-image" (click)="generateImage()">Generate
+      Image</button>
+  </div>
+  @if(generatedImageUrl) {
+  <div class="image-container">
+    <h3 class="fw-bold text-white">Generated Image:</h3>
+    <img [src]="generatedImageUrl" alt="Generated image" />
+    <!-- <img src="https://as1.ftcdn.net/jpg/02/82/09/30/1000_F_282093096_29vmP1A3vuoHWvcxja4gRTgYpMksbk2U.jpg" alt="Generated image" /> -->
+  </div>
+  }
+</div>
